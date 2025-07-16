@@ -44,7 +44,7 @@ const Contact = () => {
             <a
               key={contact.name}
               href={contact.link}
-              target="_blank"
+              target={contact.name !== 'Email' ? '_blank' : '_self'}
               rel="noopener noreferrer"
               className={`flex items-center gap-4 bg-white p-4 rounded-lg shadow-md hover:shadow-xl hover:scale-105 transform transition-all duration-300 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
               style={{ transitionDelay: `${index * 200}ms` }}
