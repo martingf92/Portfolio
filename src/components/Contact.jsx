@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa';
 
@@ -8,11 +8,13 @@ const Contact = () => {
     threshold: 0.2,
   });
 
+  const [copiedEmail, setCopiedEmail] = useState(false);
+
   const contacts = [
     {
       name: 'Email',
       icon: <FaEnvelope size={32} />,
-      link: 'mailto:marting.gf92@gmail.com',
+      link: 'marting.gf92@gmail.com',
       text: 'marting.gf92@gmail.com',
     },
     {
@@ -29,6 +31,16 @@ const Contact = () => {
     },
   ];
 
+  const handleContactClick = (contact) => {
+    if (contact.name === 'Email') {
+      navigator.clipboard.writeText(contact.link);
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2000); // Reset after 2 seconds
+    } else {
+      window.open(contact.link, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <section id="contacto" ref={ref} className="py-16 md:py-24 bg-light text-dark">
       <div className="container mx-auto px-6 text-center">
@@ -43,20 +55,16 @@ const Contact = () => {
           {contacts.map((contact, index) => (
             <div
               key={contact.name}
-              onClick={() => {
-                if (contact.name === 'Email') {
-                  window.location.href = contact.link;
-                } else {
-                  window.open(contact.link, '_blank', 'noopener,noreferrer');
-                }
-              }}
+              onClick={() => handleContactClick(contact)}
               className={`flex items-center gap-4 bg-white p-4 rounded-lg shadow-md hover:shadow-xl hover:scale-105 transform transition-all duration-300 cursor-pointer ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
               style={{ transitionDelay: `${index * 200}ms` }}
             >
               <span className="text-primary">{contact.icon}</span>
               <div className="text-left">
                 <h3 className="font-bold text-lg text-dark">{contact.name}</h3>
-                <p className="text-gray-500 text-sm">{contact.text}</p>
+                <p className="text-gray-500 text-sm">
+                  {contact.name === 'Email' && copiedEmail ? '¡Email copiado!' : contact.text}
+                </p>
               </div>
             </div>
           ))}

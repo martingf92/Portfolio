@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 
 const Footer = () => {
+  const [copied, setCopied] = useState(false);
+
   const socialLinks = [
     {
       icon: <FaLinkedin size={24} />,
@@ -15,10 +17,20 @@ const Footer = () => {
     },
     {
       icon: <FaEnvelope size={24} />,
-      href: 'mailto:marting.gf92@gmail.com',
+      href: 'marting.gf92@gmail.com',
       label: 'Email',
     },
   ];
+
+  const handleLinkClick = (link) => {
+    if (link.label === 'Email') {
+      navigator.clipboard.writeText(link.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+    } else {
+      window.open(link.href, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   return (
     <footer className="bg-secondary text-light py-8">
@@ -27,24 +39,23 @@ const Footer = () => {
         {/* Logo o Nombre */}
         <div className="mb-4 md:mb-0">
           <p className="text-lg font-bold text-accent">Martín Gómez Franco</p>
-          <p className="text-sm text-gray-400"> {new Date().getFullYear()} Todos los derechos reservados.</p>
+          <p className="text-sm text-gray-400">© {new Date().getFullYear()} Todos los derechos reservados.</p>
         </div>
 
         {/* Enlaces a Redes Sociales */}
-        <div className="flex space-x-6">
+        <div className="flex space-x-6 items-center">
           {socialLinks.map((link) => (
             <div
               key={link.label}
-              onClick={() => {
-                if (link.label === 'Email') {
-                  window.location.href = link.href;
-                } else {
-                  window.open(link.href, '_blank', 'noopener,noreferrer');
-                }
-              }}
-              className="text-light hover:text-accent transition-colors duration-300 cursor-pointer"
+              onClick={() => handleLinkClick(link)}
+              className="text-light hover:text-accent transition-colors duration-300 cursor-pointer relative"
             >
               {link.icon}
+              {link.label === 'Email' && copied && (
+                <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-accent text-white text-xs rounded py-1 px-2">
+                  ¡Copiado!
+                </span>
+              )}
             </div>
           ))}
         </div>
