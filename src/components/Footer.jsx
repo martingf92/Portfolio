@@ -27,22 +27,25 @@ const Footer = () => {
         {/* Logo o Nombre */}
         <div className="mb-4 md:mb-0">
           <p className="text-lg font-bold text-accent">Martín Gómez Franco</p>
-          <p className="text-sm text-gray-400">© {new Date().getFullYear()} Todos los derechos reservados.</p>
+          <p className="text-sm text-gray-400"> {new Date().getFullYear()} Todos los derechos reservados.</p>
         </div>
 
         {/* Enlaces a Redes Sociales */}
         <div className="flex space-x-6">
           {socialLinks.map((link) => (
-            <a
+            <div
               key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={link.label}
-              className="hover:text-accent transition-colors duration-300"
+              onClick={() => {
+                if (link.label === 'Email') {
+                  window.location.href = link.href;
+                } else {
+                  window.open(link.href, '_blank', 'noopener,noreferrer');
+                }
+              }}
+              className="text-light hover:text-accent transition-colors duration-300 cursor-pointer"
             >
               {link.icon}
-            </a>
+            </div>
           ))}
         </div>
 

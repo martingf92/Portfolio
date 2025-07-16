@@ -41,19 +41,24 @@ const Contact = () => {
 
         <div className="flex flex-col md:flex-row justify-center items-center gap-8">
           {contacts.map((contact, index) => (
-            <a
+            <div
               key={contact.name}
-              href={contact.link}
-              {...(contact.name !== 'Email' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              className={`flex items-center gap-4 bg-white p-4 rounded-lg shadow-md hover:shadow-xl hover:scale-105 transform transition-all duration-300 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+              onClick={() => {
+                if (contact.name === 'Email') {
+                  window.location.href = contact.link;
+                } else {
+                  window.open(contact.link, '_blank', 'noopener,noreferrer');
+                }
+              }}
+              className={`flex items-center gap-4 bg-white p-4 rounded-lg shadow-md hover:shadow-xl hover:scale-105 transform transition-all duration-300 cursor-pointer ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
               style={{ transitionDelay: `${index * 200}ms` }}
             >
               <span className="text-primary">{contact.icon}</span>
-              <div>
+              <div className="text-left">
                 <h3 className="font-bold text-lg text-dark">{contact.name}</h3>
                 <p className="text-gray-500 text-sm">{contact.text}</p>
               </div>
-            </a>
+            </div>
           ))}
         </div>
       </div>
