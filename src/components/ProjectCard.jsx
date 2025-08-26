@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProjectCard = ({ project, inView, index }) => {
   // Destructuramos las nuevas propiedades del proyecto
-  const { title, frontImage, description, stack, link, linkText } = project;
+  const { title, frontImage, alt, description, stack, link, linkText } = project;
 
   return (
     <div 
@@ -12,7 +12,7 @@ const ProjectCard = ({ project, inView, index }) => {
       <div className="flip-card-inner">
         {/* Cara Frontal: Muestra la imagen del proyecto */}
         <div className="flip-card-front bg-secondary flex items-center justify-center p-4">
-          <img src={frontImage} alt={`Vista previa de ${title}`} className="max-w-full max-h-full object-contain rounded-lg" />
+          <img src={frontImage} alt={alt} className="max-w-full max-h-full object-contain rounded-lg" />
         </div>
 
         {/* Cara Trasera: Muestra los detalles del proyecto */}

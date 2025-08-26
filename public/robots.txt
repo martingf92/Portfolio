@@ -1,0 +1,6 @@
+# Allow all user agents to crawl the site
+User-agent: *
+Disallow:
+
+# Point to the sitemap (good practice for the future)
+Sitemap: https://martingf92.netlify.app/sitemap.xml

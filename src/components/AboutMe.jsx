@@ -63,7 +63,7 @@ const AboutMe = () => {
           <div className={`w-full h-full flex items-center justify-center transition-all duration-1000 ${inView ? 'animate-slide-in-right' : 'opacity-0 translate-x-[100%]'}`}>
             <img 
               src={userPhoto} 
-              alt="Foto de perfil" 
+              alt="Martín Gómez Franco - Desarrollador Web" 
               className="w-full h-full object-cover rounded-lg shadow-2xl"
             />
           </div>
