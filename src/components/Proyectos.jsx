@@ -9,6 +9,7 @@ import dataAnalysisImage from '../assets/images/data.jpg';
 import mosciMorenoImage from '../assets/images/mosci_moreno.png';
 import italarImage from '../assets/images/italar.jpg';
 import motusImage from '../assets/images/motus.png';
+import logo_navbar from '../assets/images/logo_navbar.png';
 
 const projectsData = [
   {
@@ -69,6 +70,16 @@ const projectsData = [
     description: 'Optimización y rediseño parcial del sitio existente, con ajustes de estilos, estructura y navegación.',
     stack: 'WordPress, Elementor',
     link: 'https://consultoramotus.cl/',
+    linkText: 'Visitar Sitio'
+  },
+  {
+    id: 7,
+    title: 'Agrox',
+    frontImage: logo_navbar,
+    alt: 'Sitio web de Agrox servicios agrícolas con drones',
+    description: 'Sitio web institucional para empresa de relevamiento agricola con drones.',
+    stack: 'WordPress, Colibri, HTML/CSS',
+    link: 'https://agroxdroneservice.com.ar/', // Asumo este link
     linkText: 'Visitar Sitio'
   }
 ];
