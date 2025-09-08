@@ -1,9 +1,43 @@
-const { defineConfig } = require('vite');
-const react = require('@vitejs/plugin-react');
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { fileURLToPath, URL } from 'url';
 
 // https://vitejs.dev/config/
-module.exports = defineConfig({
+export default defineConfig({
   plugins: [react()],
-  // Añadimos esta línea para que Vite reconozca las extensiones de imagen en mayúsculas
-  assetsInclude: ['**/*.JPG', '**/*.PNG', '**/*.jpeg'],
+  // Configuración para manejar archivos estáticos
+  assetsInclude: ['**/*.JPG', '**/*.PNG', '**/*.jpeg', '**/*.pdf'],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: fileURLToPath(new URL('./index.html', import.meta.url)),
+      },
+      output: {
+        entryFileNames: 'assets/js/[name]-[hash].js',
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name.endsWith('.pdf')) {
+            return 'assets/files/[name][extname]';
+          }
+          return 'assets/[ext]/[name]-[hash][extname]';
+        }
+      }
+    }
+  },
+  server: {
+    port: 5173,
+    open: true,
+    fs: {
+      strict: false,
+    },
+  },
+  publicDir: 'public',
 });

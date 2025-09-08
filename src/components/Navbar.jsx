@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaDownload } from 'react-icons/fa';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,6 +23,24 @@ const Navbar = () => {
             <a href="#about" className="text-light hover:text-accent transition-colors duration-300 font-body">Sobre Mí</a>
             <a href="#proyectos" className="text-light hover:text-accent transition-colors duration-300 font-body">Proyectos</a>
             <a href="#contacto" className="text-light hover:text-accent transition-colors duration-300 font-body">Contacto</a>
+            <a 
+              href="/cv-MartinGomezFranco.pdf" 
+              download="CV-MartinGomezFranco.pdf" 
+              className="text-light hover:text-accent transition-colors duration-300 font-body flex items-center"
+              onClick={(e) => {
+                e.preventDefault();
+                const baseUrl = window.location.origin;
+                const cvUrl = `${baseUrl}/cv-MartinGomezFranco.pdf`;
+                const link = document.createElement('a');
+                link.href = cvUrl;
+                link.setAttribute('download', 'CV-MartinGomezFranco.pdf');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
+            >
+              <FaDownload className="mr-2" /> CV
+            </a>
           </nav>
           <div className="flex items-center space-x-4 ml-6">
             <a href="https://www.linkedin.com/in/martingomezfranco/" target="_blank" rel="noopener noreferrer" className="text-light hover:text-accent transition-colors duration-300">
@@ -57,6 +75,25 @@ const Navbar = () => {
           <a href="#about" onClick={handleLinkClick} className="text-light hover:text-accent block px-3 py-2 rounded-md text-base font-medium font-body">Sobre Mí</a>
           <a href="#proyectos" onClick={handleLinkClick} className="text-light hover:text-accent block px-3 py-2 rounded-md text-base font-medium font-body">Proyectos</a>
           <a href="#contacto" onClick={handleLinkClick} className="text-light hover:text-accent block px-3 py-2 rounded-md text-base font-medium font-body">Contacto</a>
+          <a 
+            href="/cv-MartinGomezFranco.pdf" 
+            download="CV-MartinGomezFranco.pdf" 
+            onClick={(e) => {
+              e.preventDefault();
+              handleLinkClick(e);
+              const baseUrl = window.location.origin;
+              const cvUrl = `${baseUrl}/cv-MartinGomezFranco.pdf`;
+              const link = document.createElement('a');
+              link.href = cvUrl;
+              link.setAttribute('download', 'CV-MartinGomezFranco.pdf');
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }} 
+            className="text-light hover:text-accent block px-3 py-2 rounded-md text-base font-medium font-body flex items-center"
+          >
+            <FaDownload className="mr-2" /> CV
+          </a>
           <div className="flex items-center space-x-6 pt-4">
             <a href="https://www.linkedin.com/in/martingomezfranco/" target="_blank" rel="noopener noreferrer" className="text-light hover:text-accent transition-colors duration-300">
               <FaLinkedin size={28} />

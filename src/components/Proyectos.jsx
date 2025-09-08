@@ -91,14 +91,22 @@ const Proyectos = () => {
   });
 
   return (
-    <section id="proyectos" ref={ref} className="container mx-auto p-8 py-16">
-      <h2 className={`text-4xl font-bold text-center mb-12 text-accent tracking-wider ${inView ? 'animate-fade-in-down' : 'opacity-0'}`}>Mis Proyectos</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
+    <div ref={ref}>
+      <h2 className={`text-4xl md:text-5xl font-semibold text-center mb-12 text-accent tracking-wider ${inView ? 'animate-fade-in-down' : 'opacity-0'}`}>
+        Mis Proyectos
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
         {projectsData.map((project, index) => (
-          <ProjectCard key={project.id} project={project} inView={inView} index={index} />
+          <ProjectCard 
+            key={project.id} 
+            project={project} 
+            inView={inView} 
+            index={index} 
+            className="w-full h-full"
+          />
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

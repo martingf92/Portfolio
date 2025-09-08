@@ -5,6 +5,9 @@ import Proyectos from './components/Proyectos';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import AboutMe from './components/AboutMe';
+import SkillsSection from './components/SkillsSection';
+import SectionDivider from './components/SectionDivider';
+import ProjectsSection from './components/ProjectsSection';
 
 // Importar las imágenes de portada
 import portadaUno from './assets/images/portada_uno.png';
@@ -29,7 +32,11 @@ function App() {
       {/* Main Content Sections */}
       <main>
         <AboutMe />
-        <Proyectos />
+        <SkillsSection />
+        <SectionDivider />
+        <ProjectsSection>
+          <Proyectos />
+        </ProjectsSection>
         <Contact />
       </main>
 

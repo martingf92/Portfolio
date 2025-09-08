@@ -29,43 +29,28 @@ const AboutMe = () => {
               Actualmente, trabajo de manera autónoma como Software Developer en Orbe Innovación, desarrollando soluciones adaptadas a necesidades reales de clientes.
             </p>
 
-            <div className="mt-8">
-              <h3 className="text-2xl font-bold text-secondary mb-4">🛠️ Tecnologías y Herramientas</h3>
-              <ul className="list-disc list-inside space-y-3 font-body text-base md:text-lg">
-                <li><strong>Lenguajes & Frameworks:</strong> Python, React.js, TypeScript, SQL, Tailwind CSS, PyTorch</li>
-                <li><strong>Análisis de Datos:</strong> Power BI, Pandas, procesos ETL, limpieza y visualización de datos</li>
-                <li><strong>Bases de datos:</strong> MySQL</li>
-              </ul>
-            </div>
-
-            <div className="mt-8">
-              <h3 className="text-2xl font-bold text-secondary mb-4">Habilidades Blandas</h3>
-              <p className="text-lg leading-relaxed font-body mb-4">
-                Además del conocimiento técnico, mis experiencias laborales me permitieron desarrollar habilidades blandas clave, altamente valoradas en el sector IT:
-              </p>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 list-disc list-inside font-body text-base md:text-lg">
-                <li>Trabajo en equipo</li>
-                <li>Comunicación efectiva</li>
-                <li>Escucha activa</li>
-                <li>Empatía</li>
-                <li>Trabajo bajo presión</li>
-                <li>Multitasking y gestión del tiempo</li>
-              </ul>
-            </div>
+            <p className="text-lg leading-relaxed font-body">
+              Mi enfoque se centra en la creación de soluciones tecnológicas que realmente impacten positivamente en los negocios y en la vida de las personas. Me apasiona seguir aprendiendo y manteniéndome actualizado con las últimas tendencias tecnológicas.
+            </p>
 
             <p className="text-lg leading-relaxed font-body mt-8">
               Me apasiona aprender constantemente, optimizar procesos y crear herramientas que generen impacto real en las personas y organizaciones.
             </p>
           </div>
 
-          {/* Columna de Imagen (Derecha) */}
-          {/* Columna de Imagen (Derecha) - Ajustada para ocupar toda la altura */}
-          <div className={`w-full h-full flex items-center justify-center transition-all duration-1000 ${inView ? 'animate-slide-in-right' : 'opacity-0 translate-x-[100%]'}`}>
+          {/* Imagen de Perfil (Derecha) */}
+          <div className={`relative w-full h-64 md:h-auto rounded-xl overflow-hidden shadow-2xl transition-all duration-1000 ${inView ? 'animate-slide-in-right' : 'opacity-0 translate-x-full'}`}>
             <img 
               src={userPhoto} 
-              alt="Martín Gómez Franco - Desarrollador Web" 
-              className="w-full h-full object-cover rounded-lg shadow-2xl"
+              alt="Foto de perfil" 
+              className="w-full h-full object-cover object-top"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+              <div>
+                <h3 className="text-2xl font-bold text-white">Martín Gómez Franco</h3>
+                <p className="text-accent font-medium">Software Developer & Data Analyst</p>
+              </div>
+            </div>
           </div>
 
         </div>

@@ -2,6 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Animation helpers */
+.reveal {
+  opacity: 0;
+  transform: translateY(8px) scale(.98);
+  will-change: transform, opacity, filter;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* Projects Section Effects */
+.projects-spotlight {
+  --mx: 50%;
+  --my: 30%;
+  position: relative;
+  isolation: isolate;
+}
+
+.projects-spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(600px 400px at var(--mx) var(--my), rgba(241, 196, 15, 0.1), transparent 60%),
+    radial-gradient(800px 600px at 80% 20%, rgba(56, 189, 248, 0.08), transparent 60%),
+    radial-gradient(900px 700px at 10% 80%, rgba(94, 234, 212, 0.08), transparent 60%);
+  pointer-events: none;
+  transition: all 0.2s ease-out;
+}
+
+/* Mesh/Grilla sutil */
+.projects-mesh::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: -2;
+  background-size: 60px 60px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  transform: translateZ(0);
+  will-change: background-position;
+  pointer-events: none;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .projects-spotlight::before {
+    background: none !important;
+  }
+  .projects-mesh::after {
+    background-image: none !important;
+  }
+}
+
+/* Smooth scrolling */
+
 html {
   scroll-behavior: smooth;
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { FaEnvelope, FaLinkedin, FaGithub, FaDownload } from 'react-icons/fa';
 
 const Contact = () => {
   const { ref, inView } = useInView({
@@ -29,13 +29,44 @@ const Contact = () => {
       link: 'https://github.com/martingf92',
       text: 'github.com/martingf92',
     },
+    {
+      name: 'Descargar mi currículum',
+      icon: <FaDownload size={32} />,
+      link: '/cv-MartinGomezFranco.pdf',
+      text: '',
+    },
   ];
 
   const handleContactClick = (contact) => {
     if (contact.name === 'Email') {
       navigator.clipboard.writeText(contact.link);
       setCopiedEmail(true);
-      setTimeout(() => setCopiedEmail(false), 2000); // Reset after 2 seconds
+      setTimeout(() => setCopiedEmail(false), 2000);
+    } else if (contact.name === 'Descargar mi currículum') {
+      // Usar una ruta absoluta para la descarga
+      const baseUrl = window.location.origin;
+      const cvUrl = `${baseUrl}/cv-MartinGomezFranco.pdf`;
+      
+      // Verificar si el archivo existe
+      fetch(cvUrl, { method: 'HEAD' })
+        .then(res => {
+          if (res.ok) {
+            // Si el archivo existe, proceder con la descarga
+            const link = document.createElement('a');
+            link.href = cvUrl;
+            link.setAttribute('download', 'CV-MartinGomezFranco.pdf');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          } else {
+            console.error('El archivo no se encontró en la ruta:', cvUrl);
+            alert('Lo sentimos, el archivo no está disponible en este momento.');
+          }
+        })
+        .catch(error => {
+          console.error('Error al intentar acceder al archivo:', error);
+          alert('Ocurrió un error al intentar descargar el archivo.');
+        });
     } else {
       window.open(contact.link, '_blank', 'noopener,noreferrer');
     }
@@ -60,11 +91,13 @@ const Contact = () => {
               style={{ transitionDelay: `${index * 200}ms` }}
             >
               <span className="text-primary">{contact.icon}</span>
-              <div className="text-left">
+              <div className={`text-left ${!contact.text ? 'flex items-center' : ''}`}>
                 <h3 className="font-bold text-lg text-dark">{contact.name}</h3>
-                <p className="text-gray-500 text-sm">
-                  {contact.name === 'Email' && copiedEmail ? '¡Email copiado!' : contact.text}
-                </p>
+                {contact.text && (
+                  <p className="text-gray-500 text-sm">
+                    {contact.name === 'Email' && copiedEmail ? '¡Email copiado!' : contact.text}
+                  </p>
+                )}
               </div>
             </div>
           ))}
