@@ -19,47 +19,31 @@
 }
 
 /* Projects Section Effects */
-.projects-spotlight {
-  --mx: 50%;
-  --my: 50%;
+.projects-section {
+  --spotlight-x: 50%;
+  --spotlight-y: 50%;
+  --spotlight-opacity: 0;
   position: relative;
   overflow: hidden;
-  z-index: 1;
+  background-color: #111827; /* Dark background for better contrast */
 }
 
-.projects-spotlight::before {
-  content: "";
+.projects-section .spotlight {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -1;
-  background:
-    radial-gradient(
-      800px 600px at var(--mx) var(--my),
-      rgba(241, 196, 15, 0.15),
-      transparent 70%
-    );
-  will-change: background;
+  opacity: var(--spotlight-opacity, 0);
+  transition: opacity 0.2s ease;
   pointer-events: none;
-}
-
-/* Mesh/Grilla sutil */
-.projects-mesh::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  background-size: 40px 40px;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  pointer-events: none;
-  opacity: 0.6;
+  background: radial-gradient(
+    circle 600px at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+    rgba(241, 196, 15, 0.25) 0%,
+    transparent 60%
+  );
+  z-index: 0;
+  will-change: background, opacity;
 }
 
 /* Reduce motion */
