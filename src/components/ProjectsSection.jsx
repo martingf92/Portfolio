@@ -1,61 +1,75 @@
-import React, { useRef, useEffect } from "react";
+"use client";
+
+import React, { useRef, useEffect, useState } from "react";
 
 export default function ProjectsSection({ children }) {
   const ref = useRef(null);
-  const isTouchDevice = typeof window !== 'undefined' && 'ontouchstart' in window;
+  const [isClient, setIsClient] = useState(false);
 
-  const updateMousePosition = (e) => {
-    const el = ref.current;
-    if (!el) return;
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const handleMouseMove = (e) => {
+    if (!ref.current) return;
     
-    const rect = el.getBoundingClientRect();
-    const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
-    const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+    const { left, top, width, height } = ref.current.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
     
-    el.style.setProperty("--mx", `${x}%`);
-    el.style.setProperty("--my", `${y}%`);
+    ref.current.style.setProperty('--mx', `${Math.max(0, Math.min(100, x))}%`);
+    ref.current.style.setProperty('--my', `${Math.max(0, Math.min(100, y))}%`);
   };
 
-  // Reset position on touch devices
+  const handleTouchMove = (e) => {
+    if (!ref.current || !e.touches[0]) return;
+    
+    const { left, top, width, height } = ref.current.getBoundingClientRect();
+    const x = ((e.touches[0].clientX - left) / width) * 100;
+    const y = ((e.touches[0].clientY - top) / height) * 100;
+    
+    ref.current.style.setProperty('--mx', `${Math.max(0, Math.min(100, x))}%`);
+    ref.current.style.setProperty('--my', `${Math.max(0, Math.min(100, y))}%`);
+  };
+
   const resetPosition = () => {
-    const el = ref.current;
-    if (el) {
-      el.style.setProperty("--mx", "50%");
-      el.style.setProperty("--my", "50%");
+    if (ref.current) {
+      ref.current.style.setProperty('--mx', '50%');
+      ref.current.style.setProperty('--my', '50%');
     }
   };
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || !isClient) return;
 
     // Set initial position
     resetPosition();
 
     // Add event listeners
-    if (!isTouchDevice) {
-      el.addEventListener('mousemove', updateMousePosition);
-      el.addEventListener('mouseleave', resetPosition);
-    }
+    el.addEventListener('mousemove', handleMouseMove);
+    el.addEventListener('mouseleave', resetPosition);
+    el.addEventListener('touchmove', handleTouchMove, { passive: true });
+    el.addEventListener('touchend', resetPosition);
 
     return () => {
-      if (!isTouchDevice) {
-        el.removeEventListener('mousemove', updateMousePosition);
-        el.removeEventListener('mouseleave', resetPosition);
-      }
+      el.removeEventListener('mousemove', handleMouseMove);
+      el.removeEventListener('mouseleave', resetPosition);
+      el.removeEventListener('touchmove', handleTouchMove);
+      el.removeEventListener('touchend', resetPosition);
     };
-  }, [isTouchDevice]);
+  }, [isClient]);
 
   return (
     <div
       ref={ref}
-      className="
-        relative projects-spotlight projects-mesh
+      onMouseMove={handleMouseMove}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={resetPosition}
+      className="relative projects-spotlight projects-mesh
         bg-[linear-gradient(120deg,#1a1a1a_0%,#0f172a_50%,#122a2f_100%)]
         bg-[length:200%_200%] motion-safe:animate-bg-pan
-        py-16 md:py-24
-        min-h-screen
-      "
+        py-16 md:py-24 min-h-screen"
     >
       <div className="relative z-10 max-w-6xl mx-auto px-4">
         {children}
@@ -65,5 +79,7 @@ export default function ProjectsSection({ children }) {
       <div className="pointer-events-none absolute -top-10 left-8 h-10 w-10 rounded-full
                     bg-accent/15 blur-xl motion-safe:animate-float-slow"></div>
     </div>
+  );
+}
   );
 }
