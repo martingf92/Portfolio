@@ -37,6 +37,7 @@ export default function ProjectsSection({ children }) {
 
   return (
     <div 
+      id="proyectos"
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
