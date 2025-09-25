@@ -1,18 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 const ProjectCard = ({ project, inView, index }) => {
-  // Destructuramos las nuevas propiedades del proyecto
   const { title, frontImage, alt, description, stack, link, linkText } = project;
+  const [isLoading, setIsLoading] = useState(true);
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  // Preload de imágenes
+  useEffect(() => {
+    const img = new Image();
+    img.src = frontImage;
+    img.onload = () => setIsLoading(false);
+  }, [frontImage]);
 
   return (
     <div 
       className={`flip-card w-full h-80 transform transition-all duration-500 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
       style={{ transitionDelay: `${index * 150}ms` }}
+      onMouseEnter={() => setIsFlipped(true)}
+      onMouseLeave={() => setIsFlipped(false)}
+      onFocus={() => setIsFlipped(true)}
+      onBlur={() => setIsFlipped(false)}
+      role="button"
+      tabIndex={0}
+      aria-label={`Ver detalles de ${title}`}
     >
-      <div className="flip-card-inner w-full h-full">
+      <div className={`flip-card-inner w-full h-full ${isFlipped ? 'flipped' : ''}`}>
         {/* Cara Frontal: Muestra la imagen del proyecto */}
         <div className="flip-card-front bg-secondary/20 backdrop-blur-sm border border-white/5 rounded-xl p-4 flex items-center justify-center h-full">
-          <img src={frontImage} alt={alt} className="max-w-full max-h-full object-contain rounded-lg" />
+          {isLoading ? (
+            <div className="w-full h-full bg-gray-800/50 animate-pulse rounded-lg"></div>
+          ) : (
+            <LazyLoadImage
+              src={frontImage}
+              alt={alt}
+              effect="opacity"
+              className="max-w-full max-h-full object-contain rounded-lg"
+              placeholderSrc="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgNDAwIDMwMCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg=="
+            />
+          )}
         </div>
 
         {/* Cara Trasera: Muestra los detalles del proyecto */}
