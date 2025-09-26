@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "Fundación Somos Barro",
-    "frontImage": "/src/assets/images/somos_barro.png",
+    "frontImage": "/images/projects/somos_barro.png",
     "alt": "Captura de pantalla del sitio web para la Fundación Somos Barro",
     "description": "Sitio institucional completo para una fundación cultural, con estructura modular, formulario de contacto, diseño responsive y SEO básico.",
     "stack": "HTML, CSS, Python, Django, Bootstrap",
@@ -12,7 +12,7 @@
   {
     "id": 2,
     "title": "E-commerce",
-    "frontImage": "/src/assets/images/ecommerce.jpg",
+    "frontImage": "/images/projects/ecommerce.jpg",
     "alt": "Página de inicio del proyecto E-commerce hecho con React",
     "description": "E-commerce moderno con React y TypeScript, consumo de API externa, sistema de navegación, carrito y filtros dinámicos.",
     "stack": "React, TypeScript, API Fetch",
@@ -22,7 +22,7 @@
   {
     "id": 3,
     "title": "Análisis de Datos",
-    "frontImage": "/src/assets/images/data.jpg",
+    "frontImage": "/images/projects/data.jpg",
     "alt": "Dashboard de Power BI del proyecto de Análisis de Datos",
     "description": "Análisis exploratorio de datos con Python. Limpieza, visualización y extracción de insights mediante Pandas, Matplotlib y Power BI.",
     "stack": "Python, Pandas, Power BI",
@@ -32,7 +32,7 @@
   {
     "id": 4,
     "title": "MOSCI & MORENO",
-    "frontImage": "/src/assets/images/mosci_moreno.png",
+    "frontImage": "/images/projects/mosci_moreno.png",
     "alt": "Página principal del sitio web de MOSCI & MORENO",
     "description": "Sitio web corporativo para una empresa de forraje hidropónico. Incluye estructura de módulos, blog informativo y landing del curso online.",
     "stack": "HTML, CSS, JavaScript, PHP",
@@ -42,7 +42,7 @@
   {
     "id": 5,
     "title": "ITALAR Construcciones",
-    "frontImage": "/src/assets/images/italar.jpg",
+    "frontImage": "/images/projects/italar.jpg",
     "alt": "Página de inicio de ITALAR Construcciones",
     "description": "Sitio web para empresa constructora. Diseño moderno, galería de proyectos y formulario de contacto funcional.",
     "stack": "HTML, CSS, JavaScript, PHP",
@@ -52,7 +52,7 @@
   {
     "id": 6,
     "title": "Motus Estudio",
-    "frontImage": "/src/assets/images/motus.png",
+    "frontImage": "/images/projects/motus.png",
     "alt": "Página de inicio de Motus Estudio",
     "description": "Sitio web para estudio de diseño. Portfolio interactivo, animaciones personalizadas y diseño minimalista.",
     "stack": "React, Framer Motion, Styled Components",
@@ -62,11 +62,21 @@
   {
     "id": 7,
     "title": "Análisis Comparativo de CSV",
-    "frontImage": "/src/assets/images/D_A.jpg",
+    "frontImage": "/images/projects/D_A.jpg",
     "alt": "Análisis de datos comparativos entre archivos CSV",
     "description": "Proyecto de análisis de datos para Bigtelligent que compara archivos CSV, identifica diferencias y genera reportes detallados.",
     "stack": "Python, Pandas, Jupyter Notebook",
     "link": "https://github.com/martingf92/Data_Bigtelligent",
     "linkText": "Ver en GitHub"
+  },
+  {
+    "id": 8,
+    "title": "Agrox",
+    "frontImage": "/images/projects/agrox.png",
+    "alt": "Sitio web de Agrox",
+    "description": "Plataforma agrícola para gestión de cultivos, seguimiento de cosechas y análisis de rendimiento. Incluye panel de control interactivo y reportes personalizados.",
+    "stack": "React, Node.js, MongoDB, Express",
+    "link": "https://agroxdroneservice.com.ar/",
+    "linkText": "Visitar Sitio"
   }
 ]

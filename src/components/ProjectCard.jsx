@@ -9,9 +9,38 @@ const ProjectCard = ({ project, inView, index }) => {
 
   // Preload de imágenes
   useEffect(() => {
+    console.log('Image path:', frontImage);
+    if (!frontImage) {
+      console.error('No image path provided');
+      setIsLoading(false);
+      return;
+    }
+    
+    // Asegurarse de que la ruta de la imagen sea correcta
+    let imagePath = frontImage;
+    if (frontImage.startsWith('/')) {
+      // Si la ruta comienza con /, asumimos que es relativa a la carpeta public
+      imagePath = frontImage.startsWith('/images') ? frontImage : `/images${frontImage}`;
+    }
+    
     const img = new Image();
-    img.src = frontImage;
-    img.onload = () => setIsLoading(false);
+    img.src = imagePath;
+    console.log('Loading image from:', img.src);
+    
+    img.onload = () => {
+      console.log('Image loaded successfully:', imagePath);
+      setIsLoading(false);
+    };
+    
+    img.onerror = (e) => {
+      console.error('Error loading image:', imagePath, e);
+      // Intentar cargar una imagen de respaldo
+      img.src = '/images/placeholder.jpg';
+      img.onload = () => {
+        console.log('Using fallback image');
+        setIsLoading(false);
+      };
+    };
   }, [frontImage]);
 
   return (
@@ -33,11 +62,15 @@ const ProjectCard = ({ project, inView, index }) => {
             <div className="w-full h-full bg-gray-800/50 animate-pulse rounded-lg"></div>
           ) : (
             <LazyLoadImage
-              src={frontImage}
-              alt={alt}
+              src={frontImage.startsWith('/') ? frontImage : `/images/${frontImage}`}
+              alt={alt || `Imagen del proyecto ${title}`}
               effect="opacity"
               className="max-w-full max-h-full object-contain rounded-lg"
               placeholderSrc="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgNDAwIDMwMCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg=="
+              onError={(e) => {
+                console.error('Error loading image in LazyLoadImage:', frontImage);
+                e.target.src = '/images/placeholder.jpg';
+              }}
             />
           )}
         </div>

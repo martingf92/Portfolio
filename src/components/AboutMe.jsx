@@ -1,6 +1,7 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
-import userPhoto from '../assets/images/MIA_LINKEDIN.jpeg';
+// Ruta de la imagen de perfil
+const userPhoto = '/images/projects/MIA_LINKEDIN.jpeg';
 
 const AboutMe = () => {
   const { ref, inView } = useInView({

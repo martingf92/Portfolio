@@ -9,11 +9,11 @@ import SkillsSection from './components/SkillsSection';
 import SectionDivider from './components/SectionDivider';
 import ProjectsSection from './components/ProjectsSection';
 
-// Importar las imágenes de portada
-import portadaUno from './assets/images/portada_uno.png';
-import portadaDos from './assets/images/portada_dos.jpeg';
-
-const coverImages = [portadaUno, portadaDos];
+// Rutas de las imágenes de portada
+const coverImages = [
+  '/images/projects/portada_uno.png',
+  '/images/projects/portada_dos.jpeg'
+];
 
 function App() {
   return (

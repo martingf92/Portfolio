@@ -6,12 +6,14 @@ import { fileURLToPath, URL } from 'url';
 export default defineConfig({
   plugins: [react()],
   // Configuración para manejar archivos estáticos
-  assetsInclude: ['**/*.JPG', '**/*.PNG', '**/*.jpeg', '**/*.pdf'],
+  assetsInclude: ['**/*.JPG', '**/*.PNG', '**/*.jpeg', '**/*.jpg', '**/*.pdf'],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '/images': fileURLToPath(new URL('./public/images', import.meta.url))
     }
   },
+  publicDir: 'public',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
